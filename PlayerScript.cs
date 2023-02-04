@@ -95,8 +95,6 @@ public class PlayerScript : MonoBehaviour
     void AddItemToInventory(GameObject obj)
     {
         manager.inventory.Add(obj.name);
-
-        manager.inventory[obj.name]++;
         PrintGameManagerStatus();
     }
     #endregion
