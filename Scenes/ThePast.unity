@@ -504,8 +504,8 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Material: {fileID: 6200000, guid: c080f7615506242ea97da9e27eb331fb, type: 2}
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -537,8 +537,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7265491be0cc94eeea970f6fadc28d6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 10
-  maxSpeed: 10
+  walkSpeed: 3
+  maxSpeed: 15
   increasedSpeed: 3
   PlayerSpawn: {fileID: 291072058}
   GameManager: {fileID: 1735979913}
@@ -675,7 +675,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1062825727
 GameObject:
@@ -1735,7 +1735,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2014259253}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.9119, y: 0.128, z: 0}
+  m_LocalPosition: {x: -2.9119, y: 0.128, z: 1}
   m_LocalScale: {x: 1.342301, y: 1.342301, z: 1.342301}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1910,5 +1910,5 @@ Transform:
   - {fileID: 1935146589}
   - {fileID: 1806243799}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -34,15 +34,8 @@ public class PlayerScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-
-
         if (coll.collider == true)
         {
-            if (coll.collider.gameObject.tag == "Door")
-            {
-                transform.position = PlayerSpawn.transform.position;
-                manager.isTransitioning = true;
-            }
             Debug.Log("Touching game object: " + coll.gameObject.name);
             manager.touchingObj = coll.gameObject;
         }
@@ -71,7 +64,7 @@ public class PlayerScript : MonoBehaviour
         else
         {
             // increase speed while walking
-            float potentialInc = increasedSpeed + 10f * Time.deltaTime;
+            float potentialInc = increasedSpeed + 0.01f * Time.deltaTime;
             if (potentialInc > maxSpeed)
             {
                 increasedSpeed = maxSpeed;
@@ -82,17 +75,10 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        //transform.position += move * increasedSpeed * Time.deltaTime;
-        Rigidbody2D comp = GetComponent<Rigidbody2D>();
-        comp.AddForce(move * increasedSpeed * Time.deltaTime);
-
-<<<<<<< HEAD
        velocity = move * increasedSpeed;
        rb.velocity = velocity;
     }
-}
-=======
-    }
+
     #region item interaction
     void ItemInteraction()
     {
@@ -136,4 +122,4 @@ public class PlayerScript : MonoBehaviour
     }
     #endregion
 }
->>>>>>> 33c420e (Inventory)
+
