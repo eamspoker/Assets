@@ -9,6 +9,10 @@ public class UIControllerScript : MonoBehaviour
     public bool toggleMap = false;
     public Image map;
     public TMP_Text text;
+    public Texture2D JesusFishTexture;
+    public GameObject Pocket;
+    public GameObject GameManager;
+    private GameManagerScript manager;
 
     // Start is called before the first frame update
     void Start()
@@ -31,4 +35,16 @@ public class UIControllerScript : MonoBehaviour
     {
         toggleMap = true;
     }
+    
+    #region pocket management
+
+    public void CheckPockets()
+    {
+        int i = 0;
+        // while(i < Pocket.transform.childCount)
+        // {
+        //     if(manager.inventory["Jesus Fish"])
+        // }
+    }
+    #endregion
 }
