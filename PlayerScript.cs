@@ -94,11 +94,7 @@ public class PlayerScript : MonoBehaviour
 
     void AddItemToInventory(GameObject obj)
     {
-        if (!manager.inventory.ContainsKey(obj.name))
-        {
-            manager.inventory[obj.name] = 0;
-        }
-        manager.inventory[obj.name]++;
+        manager.inventory.Add(obj.name);
         PrintGameManagerStatus();
     }
     #endregion
@@ -107,9 +103,9 @@ public class PlayerScript : MonoBehaviour
     void PrintGameManagerStatus()
     {
         Debug.Log("Inventory:");
-        foreach (KeyValuePair<string, int> kvp in manager.inventory)
+        foreach (string kvp in manager.inventory)
         {
-            Debug.Log(string.Format("Item: {0}, Count: {1}", kvp.Key, kvp.Value));
+            Debug.Log(string.Format("Item: {0}", kvp));
         }
     }
 

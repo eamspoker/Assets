@@ -7,7 +7,7 @@ public class GameManagerScript : MonoBehaviour
 
     public bool isTransitioning = false;
     public GameObject touchingObj = null;
-    public Dictionary<string, int> inventory = new Dictionary<string, int>();
+    public ArrayList inventory = new ArrayList();
     // Start is called before the first frame update
     void Start()
     {
