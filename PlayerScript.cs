@@ -12,6 +12,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject PlayerSpawn;
     public GameObject GameManager;
     private GameManagerScript manager;
+    private Vector3 velocity;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +29,8 @@ public class PlayerScript : MonoBehaviour
         lastVelocity = rb.velocity;
 
     }
+
+  
 
     void OnCollisionEnter2D(Collision2D coll)
     {
@@ -65,6 +68,7 @@ public class PlayerScript : MonoBehaviour
         }
        }
 
-       transform.position += move * increasedSpeed * Time.deltaTime;
+       velocity = move * increasedSpeed;
+       rb.velocity = velocity;
     }
 }
