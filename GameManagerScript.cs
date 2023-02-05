@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -8,6 +9,14 @@ public class GameManagerScript : MonoBehaviour
     public bool isTransitioning = false;
     public GameObject touchingObj = null;
     public ArrayList inventory = new ArrayList();
+    public float UITextDisplayTime = 2.0f;
+    public float UITextDisplayTimeRemaining = 0f;
+    public float textBubbleDisplayTime = 2.0f;
+    public float textBubbleDisplayTimeRemaining = 0f;
+    public GameObject UIText;
+    public GameObject textBubble;
+    public GameObject textBubbleText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,5 +27,38 @@ public class GameManagerScript : MonoBehaviour
     void Update()
     {
 
+        // itemTextDisplayTime
+        if (UITextDisplayTimeRemaining > 0 && touchingObj == null)
+        {
+            UITextDisplayTimeRemaining -= Time.deltaTime;
+        }
+
+        if (UITextDisplayTimeRemaining < 0)
+        {
+            UITextDisplayTimeRemaining = 0;
+        }
+
+        if (UITextDisplayTimeRemaining == 0)
+        {
+            UIText.SetActive(false);
+            UIText.GetComponent<TextMeshProUGUI>().SetText("");
+        }
+
+        // textBubbleDisplayTime
+        if (textBubbleDisplayTimeRemaining > 0 && touchingObj == null)
+        {
+            textBubbleDisplayTimeRemaining -= Time.deltaTime;
+        }
+
+        if (textBubbleDisplayTimeRemaining < 0)
+        {
+            textBubbleDisplayTimeRemaining = 0;
+        }
+
+        if (textBubbleDisplayTimeRemaining == 0)
+        {
+            textBubble.SetActive(false);
+            textBubbleText.GetComponent<TextMeshPro>().SetText("");
+        }
     }
 }

@@ -30,7 +30,7 @@ public class PlayerScript : MonoBehaviour
 
     }
 
-  
+
 
     void OnCollisionEnter2D(Collision2D coll)
     {
@@ -75,8 +75,8 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-       velocity = move * increasedSpeed;
-       rb.velocity = velocity;
+        velocity = move * increasedSpeed;
+        rb.velocity = velocity;
     }
 
     #region item interaction
@@ -107,6 +107,8 @@ public class PlayerScript : MonoBehaviour
         {
             Debug.Log(string.Format("Item: {0}", kvp));
         }
+        Debug.Log("touchingObj: " + manager.touchingObj);
+        Debug.Log("UITextDisplayTimeRemaining: " + manager.UITextDisplayTimeRemaining);
     }
 
     void ShowGameManagerStatus()
