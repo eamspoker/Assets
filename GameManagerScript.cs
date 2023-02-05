@@ -8,7 +8,7 @@ public class GameManagerScript : MonoBehaviour
 
     public bool isTransitioning = false;
     public bool updatingPockets = false;
-    public GameObject touchingObj = null;
+    public GameObject touchingObj;
     public ArrayList inventory = new ArrayList();
     public float UITextDisplayTime = 2.0f;
     public float UITextDisplayTimeRemaining = 0f;
