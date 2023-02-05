@@ -18,58 +18,55 @@ public class GameManagerScript : MonoBehaviour
     public GameObject UIButton;
     public GameObject textBubble;
     public GameObject textBubbleText;
+    public GameObject player;
     private int verticalOffset = 3;
+    public bool hasStarted = false;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        player.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
-
-
-
-
-
-
-        // itemTextDisplayTime
-        if (UITextDisplayTimeRemaining > 0 && touchingObj == null)
+        if(!hasStarted)
         {
-            UITextDisplayTimeRemaining -= Time.deltaTime;
-        }
+            // itemTextDisplayTime
+            if (UITextDisplayTimeRemaining > 0 && touchingObj == null)
+            {
+                UITextDisplayTimeRemaining -= Time.deltaTime;
+            }
 
-        if (UITextDisplayTimeRemaining < 0)
-        {
-            UITextDisplayTimeRemaining = 0;
-        }
+            if (UITextDisplayTimeRemaining < 0)
+            {
+                UITextDisplayTimeRemaining = 0;
+            }
 
-        if (UITextDisplayTimeRemaining == 0)
-        {
-            UIButton.SetActive(false);
-            UIText.SetActive(false);
-            UIText.GetComponent<TextMeshProUGUI>().SetText("");
-        }
+            if (UITextDisplayTimeRemaining == 0)
+            {
+                UIButton.SetActive(false);
+                UIText.SetActive(false);
+                UIText.GetComponent<TextMeshProUGUI>().SetText("");
+            }
 
-        // textBubbleDisplayTime
-        if (textBubbleDisplayTimeRemaining > 0 && touchingObj == null)
-        {
-            textBubbleDisplayTimeRemaining -= Time.deltaTime;
-        }
+            // textBubbleDisplayTime
+            if (textBubbleDisplayTimeRemaining > 0 && touchingObj == null)
+            {
+                textBubbleDisplayTimeRemaining -= Time.deltaTime;
+            }
 
-        if (textBubbleDisplayTimeRemaining < 0)
-        {
-            textBubbleDisplayTimeRemaining = 0;
-        }
+            if (textBubbleDisplayTimeRemaining < 0)
+            {
+                textBubbleDisplayTimeRemaining = 0;
+            }
 
-        if (textBubbleDisplayTimeRemaining == 0)
-        {
-            textBubble.SetActive(false);
-            textBubbleText.GetComponent<TextMeshProUGUI>().text = "";
+            if (textBubbleDisplayTimeRemaining == 0)
+            {
+                textBubble.SetActive(false);
+                textBubbleText.GetComponent<TextMeshProUGUI>().text = "";
+            }
         }
     }
 
