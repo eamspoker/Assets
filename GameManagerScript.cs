@@ -15,8 +15,10 @@ public class GameManagerScript : MonoBehaviour
     public float textBubbleDisplayTime = 2.0f;
     public float textBubbleDisplayTimeRemaining = 0f;
     public GameObject UIText;
+    public GameObject UIButton;
     public GameObject textBubble;
     public GameObject textBubbleText;
+    private int verticalOffset = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,13 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+
+
+
+
+
 
         // itemTextDisplayTime
         if (UITextDisplayTimeRemaining > 0 && touchingObj == null)
@@ -41,6 +50,7 @@ public class GameManagerScript : MonoBehaviour
 
         if (UITextDisplayTimeRemaining == 0)
         {
+            UIButton.SetActive(false);
             UIText.SetActive(false);
             UIText.GetComponent<TextMeshProUGUI>().SetText("");
         }
@@ -59,7 +69,26 @@ public class GameManagerScript : MonoBehaviour
         if (textBubbleDisplayTimeRemaining == 0)
         {
             textBubble.SetActive(false);
-            textBubbleText.GetComponent<TextMeshPro>().SetText("");
+            textBubbleText.GetComponent<TextMeshProUGUI>().text = "";
         }
+    }
+
+    public void displayDialog(string textBubbleContent, string UITextContent, Vector3 objPosition)
+    {
+        // UI TextMeshPro
+        UIButton.SetActive(true);
+        UIText.SetActive(true);
+        UIText.GetComponent<TextMeshProUGUI>().SetText(UITextContent);
+        UITextDisplayTimeRemaining = UITextDisplayTime;
+
+        // Text Bubble
+        
+        textBubble.SetActive(true);
+        textBubbleText.GetComponent<TextMeshProUGUI>().text = textBubbleContent;
+        // offset
+        // Vector3 touchingObjPos = objPosition;
+        // touchingObjPos.y += verticalOffset;
+        // textBubble.transform.position = touchingObjPos;
+        textBubbleDisplayTimeRemaining = textBubbleDisplayTime;
     }
 }

@@ -18,10 +18,7 @@ public class PlayerScript : MonoBehaviour
     private enum Direction {front, back, left, right};
     private Direction orientation = Direction.front;
     private Animator anim;
-
-    private int verticalOffset = 3;
-    public string UITextContent = "Hello! I'm Jesus Fish.";
-    public string textBubbleContent = "Jesus Fish";
+    public GameObject triggerObj;
 
 
     #region basic functions
@@ -48,16 +45,17 @@ public class PlayerScript : MonoBehaviour
     #region collisions
   void OnTriggerEnter2D(Collider2D coll)
     {
-        print(coll.gameObject.tag);
-            
-            if(coll.gameObject.tag == "InteractionCircle")
-            {
-                coll.gameObject.GetComponent<Renderer>().enabled = true;
-            }
+        triggerObj = coll.gameObject;
+        
+        if(coll.gameObject.tag == "InteractionCircle")
+        {
+            coll.gameObject.GetComponent<Renderer>().enabled = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D coll)
     {
+        triggerObj = null;
         if(coll.gameObject.tag == "InteractionCircle")
         {
             coll.gameObject.GetComponent<Renderer>().enabled = false;
@@ -66,39 +64,16 @@ public class PlayerScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.collider == true)
-        {
+        // if (coll.collider == true)
+        // {
 
-            Debug.Log("Touching game object: " + coll.gameObject.name);
-            manager.touchingObj = coll.gameObject;
-
-            if(findDialog(coll.gameObject.name))
-            {
-                // UI TextMeshPro
-                manager.UIText.SetActive(true);
-                manager.UIText.GetComponent<TextMeshProUGUI>().SetText(UITextContent);
-                manager.UITextDisplayTimeRemaining = manager.UITextDisplayTime;
-
-                // Text Bubble
-                manager.textBubble.SetActive(true);
-                manager.textBubbleText.GetComponent<TextMeshPro>().SetText(textBubbleContent);
-                // offset
-                Vector3 touchingObjPos = coll.gameObject.transform.position;
-                touchingObjPos.y += verticalOffset;
-                manager.textBubble.transform.position = touchingObjPos;
-                manager.textBubbleDisplayTimeRemaining = manager.textBubbleDisplayTime;
-            }
-        }
+        //     // Debug.Log("Touching game object: " + coll.gameObject.name);
+        //     manager.touchingObj = coll.gameObject;
+        // }
     }
 
     private bool findDialog(string name)
     {
-        if(name == "JesusFish")
-        {
-            UITextContent = "Hello! I'm Jesus Fish.";
-            textBubbleContent = "Jesus Fish";
-            return true;
-        } 
 
         return false;
     }
@@ -192,14 +167,17 @@ public class PlayerScript : MonoBehaviour
     void ItemInteraction()
     {
         // TODO: check whether the touching object is allowed to be interacted with
-        if (Input.GetKey("e") && manager.touchingObj != null)
+        if (Input.GetKey("e") && triggerObj != null)
         {
-            Debug.Log("Interacting with the item: " + manager.touchingObj.name);
-            AddItemToInventory(manager.touchingObj);
-            Destroy(manager.touchingObj);
-            manager.touchingObj = null;
-            // tell pockets to update
-            manager.updatingPockets = true;
+            Debug.Log("Interacting with the item: " + triggerObj.name);
+
+            if(triggerObj.tag == "CanGrab")
+            {
+                AddItemToInventory(triggerObj);
+                Destroy(triggerObj);
+                // tell pockets to update
+                manager.updatingPockets = true;
+            }
         }
     }
 
