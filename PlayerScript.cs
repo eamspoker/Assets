@@ -68,32 +68,39 @@ public class PlayerScript : MonoBehaviour
     {
         if (coll.collider == true)
         {
-            findDialog(coll.gameObject.name);
+
             Debug.Log("Touching game object: " + coll.gameObject.name);
             manager.touchingObj = coll.gameObject;
-            // UI TextMeshPro
-            manager.UIText.SetActive(true);
-            manager.UIText.GetComponent<TextMeshProUGUI>().SetText(UITextContent);
-            manager.UITextDisplayTimeRemaining = manager.UITextDisplayTime;
 
-            // Text Bubble
-            manager.textBubble.SetActive(true);
-            manager.textBubbleText.GetComponent<TextMeshPro>().SetText(textBubbleContent);
-            // offset
-            Vector3 touchingObjPos = coll.gameObject.transform.position;
-            touchingObjPos.y += verticalOffset;
-            manager.textBubble.transform.position = touchingObjPos;
-            manager.textBubbleDisplayTimeRemaining = manager.textBubbleDisplayTime;
+            if(findDialog(coll.gameObject.name))
+            {
+                // UI TextMeshPro
+                manager.UIText.SetActive(true);
+                manager.UIText.GetComponent<TextMeshProUGUI>().SetText(UITextContent);
+                manager.UITextDisplayTimeRemaining = manager.UITextDisplayTime;
+
+                // Text Bubble
+                manager.textBubble.SetActive(true);
+                manager.textBubbleText.GetComponent<TextMeshPro>().SetText(textBubbleContent);
+                // offset
+                Vector3 touchingObjPos = coll.gameObject.transform.position;
+                touchingObjPos.y += verticalOffset;
+                manager.textBubble.transform.position = touchingObjPos;
+                manager.textBubbleDisplayTimeRemaining = manager.textBubbleDisplayTime;
+            }
         }
     }
 
-    private void findDialog(string name)
+    private bool findDialog(string name)
     {
         if(name == "JesusFish")
         {
             UITextContent = "Hello! I'm Jesus Fish.";
             textBubbleContent = "Jesus Fish";
-        }
+            return true;
+        } 
+
+        return false;
     }
 
     private void OnCollisionExit2D(Collision2D coll)
