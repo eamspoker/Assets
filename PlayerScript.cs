@@ -6,9 +6,9 @@ using TMPro;
 
 public class PlayerScript : MonoBehaviour
 {
-    public float walkSpeed = 3.0f;
-    public float maxSpeed = 15.0f;
-    public float increasedSpeed = 3.0f;
+    public float walkSpeed;
+    public float maxSpeed;
+    public float increasedSpeed;
     private Rigidbody2D rb;
     private Vector3 lastVelocity = Vector3.zero;
     public GameObject PlayerSpawn;

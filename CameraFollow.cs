@@ -21,8 +21,8 @@ public class CameraFollow : MonoBehaviour
         Vector3 playerPosition = player.transform.position;
         Vector3 cameraPosition = transform.position;
 
-        cameraPosition.x = Mathf.SmoothDamp(cameraPosition.x, playerPosition.x, ref xVelocity, 0.7f);
-        cameraPosition.y = Mathf.SmoothDamp(cameraPosition.y, playerPosition.y, ref yVelocity, 0.7f);
+        cameraPosition.x = Mathf.SmoothDamp(cameraPosition.x, playerPosition.x, ref xVelocity, 0.2f);
+        cameraPosition.y = Mathf.SmoothDamp(cameraPosition.y, playerPosition.y, ref yVelocity, 0.2f);
 
         transform.position = cameraPosition;
         
