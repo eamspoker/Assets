@@ -19,7 +19,7 @@ public class PlayerScript : MonoBehaviour
 
     #region basic functions
     // Start is called before the first frame update
-    void Start()
+    void Star`t()
     {
         anim = GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -145,8 +145,8 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-       velocity = move * increasedSpeed;
-       rb.velocity = velocity;
+        velocity = move * increasedSpeed;
+        rb.velocity = velocity;
     }
 
     #endregion
@@ -181,6 +181,8 @@ public class PlayerScript : MonoBehaviour
         {
             Debug.Log(string.Format("Item: {0}", kvp));
         }
+        Debug.Log("touchingObj: " + manager.touchingObj);
+        Debug.Log("UITextDisplayTimeRemaining: " + manager.UITextDisplayTimeRemaining);
     }
 
     void ShowGameManagerStatus()

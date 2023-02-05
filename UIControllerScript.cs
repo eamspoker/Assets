@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class UIControllerScript : MonoBehaviour
 {
@@ -25,6 +26,14 @@ public class UIControllerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown("m"))
+        {
+            toggleMap = !toggleMap;
+        }
+        if (Input.GetKeyDown("r"))
+        {
+            SceneManager.LoadScene("ThePast");
+        }
         if(toggleMap)
         {
            map.enabled = !map.enabled;
