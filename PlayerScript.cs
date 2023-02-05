@@ -47,7 +47,7 @@ public class PlayerScript : MonoBehaviour
     {
         triggerObj = coll.gameObject;
         
-        if(coll.gameObject.tag == "InteractionCircle")
+        if(coll.gameObject.tag == "CanGrab")
         {
             coll.gameObject.GetComponent<Renderer>().enabled = true;
         }
@@ -56,7 +56,7 @@ public class PlayerScript : MonoBehaviour
     void OnTriggerExit2D(Collider2D coll)
     {
         triggerObj = null;
-        if(coll.gameObject.tag == "InteractionCircle")
+        if(coll.gameObject.tag == "CanGrab")
         {
             coll.gameObject.GetComponent<Renderer>().enabled = false;
         }
@@ -167,12 +167,13 @@ public class PlayerScript : MonoBehaviour
     void ItemInteraction()
     {
         // TODO: check whether the touching object is allowed to be interacted with
-        if (Input.GetKey("e") && triggerObj != null)
+        if (Input.GetKey("x") && triggerObj != null)
         {
             Debug.Log("Interacting with the item: " + triggerObj.name);
 
             if(triggerObj.tag == "CanGrab")
             {
+                manager.displayAlert("Obtained " + triggerObj.name);
                 AddItemToInventory(triggerObj);
                 Destroy(triggerObj);
                 // tell pockets to update

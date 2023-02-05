@@ -33,6 +33,9 @@ public class PooperBoy : MonoBehaviour
             manager.displayDialog("Delicious!",
         "Pooper Boy", transform.position);
         seed.SetActive(true);
+        manager.inventory.Remove("Royal Blackberry");
+        manager.displayAlert("Gave away Royal Blackberry");
+        manager.updatingPockets = true;
         }
         else
         {

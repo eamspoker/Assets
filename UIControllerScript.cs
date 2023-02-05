@@ -153,6 +153,8 @@ public class UIControllerScript : MonoBehaviour
                 return seed;
             case "Cat Cup":
                 return cup;
+            case "Cat Cup (Filled)":
+                return cup;
             case "Royal Blackberry":
                 return blackberry;
             default:
