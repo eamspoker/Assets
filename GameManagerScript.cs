@@ -6,6 +6,7 @@ public class GameManagerScript : MonoBehaviour
 {
 
     public bool isTransitioning = false;
+    public bool updatingPockets = false;
     public GameObject touchingObj = null;
     public ArrayList inventory = new ArrayList();
     // Start is called before the first frame update

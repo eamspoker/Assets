@@ -13,9 +13,15 @@ public class PlayerScript : MonoBehaviour
     public GameObject GameManager;
     private GameManagerScript manager;
     private Vector3 velocity;
+    private enum Direction {front, back, left, right};
+    private Direction orientation = Direction.front;
+    private Animator anim;
+
+    #region basic functions
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         manager = GameManager.GetComponent<GameManagerScript>();
     }
@@ -30,7 +36,26 @@ public class PlayerScript : MonoBehaviour
 
     }
 
-  
+    #endregion
+
+    #region collisions
+  void OnTriggerEnter2D(Collider2D coll)
+    {
+        print(coll.gameObject.tag);
+            
+            if(coll.gameObject.tag == "InteractionCircle")
+            {
+                coll.gameObject.GetComponent<Renderer>().enabled = true;
+            }
+    }
+
+    void OnTriggerExit2D(Collider2D coll)
+    {
+        if(coll.gameObject.tag == "InteractionCircle")
+        {
+            coll.gameObject.GetComponent<Renderer>().enabled = false;
+        }
+    }
 
     void OnCollisionEnter2D(Collision2D coll)
     {
@@ -46,14 +71,59 @@ public class PlayerScript : MonoBehaviour
         if (coll.collider == true)
         {
             manager.touchingObj = null;
+            
         }
     }
 
+    #endregion
+
+    #region movement
+
+    void OnGUI()
+    {
+        if (Event.current.Equals(Event.KeyboardEvent("up")) ||
+            Event.current.Equals(Event.KeyboardEvent("w")))
+        {
+            anim.Play("Walking_Back");
+            orientation = Direction.back;
+
+        } else if(Event.current.Equals(Event.KeyboardEvent("down")) ||
+            Event.current.Equals(Event.KeyboardEvent("s")))
+        {
+            anim.Play("Walking_Front");
+            orientation = Direction.front;
+        } else if(Event.current.Equals(Event.KeyboardEvent("right")) ||
+            Event.current.Equals(Event.KeyboardEvent("d")))
+        {
+            anim.Play("Walking_Right");
+            orientation = Direction.right;
+        } else if(Event.current.Equals(Event.KeyboardEvent("left")) ||
+            Event.current.Equals(Event.KeyboardEvent("a"))) {
+            anim.Play("Walking_Left");
+            orientation = Direction.left;
+        }
+
+        if(rb.velocity == Vector2.zero)
+        {
+            if(orientation == Direction.left) anim.Play("Left_Idle");
+            else if(orientation == Direction.right) anim.Play("Right_Idle");
+            else if(orientation == Direction.front) anim.Play("Idle_Front");
+            else if(orientation == Direction.back) anim.Play("Back_Idle");
+        }
+    }
 
     void Move()
     {
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+        Vector3 move;
 
+      
+        if(orientation == Direction.left || orientation == Direction.right)
+        {
+            move =  new Vector3(Input.GetAxis("Horizontal"),0,0);
+        } else {
+            move =  new Vector3(0, Input.GetAxis("Vertical"),0);
+        
+        }
 
         if (move.Equals(Vector3.zero))
         {
@@ -79,6 +149,8 @@ public class PlayerScript : MonoBehaviour
        rb.velocity = velocity;
     }
 
+    #endregion
+
     #region item interaction
     void ItemInteraction()
     {
@@ -89,6 +161,8 @@ public class PlayerScript : MonoBehaviour
             AddItemToInventory(manager.touchingObj);
             Destroy(manager.touchingObj);
             manager.touchingObj = null;
+            // tell pockets to update
+            manager.updatingPockets = true;
         }
     }
 
